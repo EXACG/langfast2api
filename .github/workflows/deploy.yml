@@ -28,5 +28,6 @@ jobs:
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "langfast2api" # Replace with your Deno Deploy project name
+          project: ${{ secrets.DENO_PROJECT_ID || 'langfast2api' }}
           entrypoint: "deploy.ts"
+          token: ${{ secrets.DENO_DEPLOY_TOKEN }}

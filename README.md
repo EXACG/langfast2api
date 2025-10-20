@@ -27,14 +27,80 @@ deno task dev
 
 ### Deno Deploy 部署
 
-本项目可以直接部署到 Deno Deploy：
+本项目可以直接部署到 Deno Deploy，无需服务器维护。
 
-1. 访问 [Deno Deploy](https://dash.deno.com/)
-2. 创建新项目并连接到 GitHub 仓库
-3. 选择 `deploy.ts` 作为入口点
-4. 点击部署
+#### 方法一：通过 Deno Deploy 控制台手动部署
 
-或者使用 GitHub Actions 自动部署（见下文）。
+1. **准备 GitHub 仓库**
+   - 确保代码已推送到 GitHub 仓库
+   - 本项目已配置好 `deploy.ts` 作为入口点
+
+2. **创建 Deno Deploy 项目**
+   - 访问 [Deno Deploy Dashboard](https://dash.deno.com/)
+   - 点击 "New Project"
+   - 选择 "GitHub" 连接你的 GitHub 账户
+   - 选择 `CassiopeiaCode/langfast2api` 仓库
+   - 选择 `main` 分支
+
+3. **配置部署设置**
+   - **入口点**: 选择 `deploy.ts`
+   - **环境变量**: 无需额外配置（所有配置已在代码中）
+   - 点击 "Deploy" 开始部署
+
+4. **获取部署 URL**
+   - 部署完成后，你会得到一个类似 `https://langfast2api-xxxx.deno.dev` 的 URL
+   - 这个 URL 就是你的 API 端点，可以直接使用
+
+#### 方法二：通过 GitHub Actions 自动部署
+
+1. **获取 Deno Deploy 访问令牌**
+   - 在 Deno Deploy Dashboard 中
+   - 点击右上角头像 → "Account"
+   - 在 "Deno Deploy API tokens" 部分创建新令牌
+   - 复制生成的令牌
+
+2. **配置 GitHub Secrets**
+   - 在 GitHub 仓库中
+   - 进入 "Settings" → "Secrets and variables" → "Actions"
+   - 点击 "New repository secret"
+   - 添加以下 secrets：
+     - `DENO_DEPLOY_TOKEN`: 上一步获取的 Deno Deploy 令牌
+     - `DENO_PROJECT_ID`: 你的 Deno Deploy 项目 ID（从项目 URL 获取）
+
+3. **修改工作流文件**
+   - 编辑 `.github/workflows/deploy.yml`
+   - 将 `project: "langfast2api"` 替换为你的实际项目 ID
+
+4. **触发部署**
+   - 推送代码到 `main` 分支会自动触发部署
+   - 也可以在 GitHub Actions 页面手动触发
+
+#### 部署后使用
+
+部署完成后，你可以使用以下方式测试：
+
+```bash
+# 替换 YOUR_DEPLOY_URL 为你的实际部署 URL
+YOUR_DEPLOY_URL="https://your-project-name.deno.dev"
+
+# 测试模型列表
+curl $YOUR_DEPLOY_URL/v1/models
+
+# 测试聊天完成
+curl -X POST $YOUR_DEPLOY_URL/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-5",
+    "messages": [{"role": "user", "content": "Hello!"}],
+    "stream": false
+  }'
+```
+
+#### 注意事项
+
+- Deno Deploy 免费版有请求限制，生产环境请考虑升级
+- WebSocket 连接在 Deno Deploy 上有超时限制，长时间请求可能需要优化
+- 部署日志可以在 Deno Deploy Dashboard 中查看
 
 ## API 使用示例
 
