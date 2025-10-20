@@ -15,7 +15,7 @@
 
 - 安装 [Deno](https://deno.land/)
 
-### 运行服务器
+### 本地运行
 
 ```bash
 git clone https://github.com/CassiopeiaCode/langfast2api.git
@@ -24,6 +24,17 @@ deno task dev
 ```
 
 服务器将在 `http://localhost:8000` 上启动。
+
+### Deno Deploy 部署
+
+本项目可以直接部署到 Deno Deploy：
+
+1. 访问 [Deno Deploy](https://dash.deno.com/)
+2. 创建新项目并连接到 GitHub 仓库
+3. 选择 `deploy.ts` 作为入口点
+4. 点击部署
+
+或者使用 GitHub Actions 自动部署（见下文）。
 
 ## API 使用示例
 
