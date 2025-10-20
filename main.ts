@@ -62,8 +62,14 @@ export async function handler(req: Request): Promise<Response> {
   }
 
   if (pathname === "/v1/models" && req.method === "GET") {
-    // 直接回 models.json
-    return json({ data: models });
+    // 转换为 OpenAI 格式
+    const data = models.map((model) => ({
+      id: model.slug,
+      object: "model",
+      created: Math.floor(new Date(model.created_at).getTime() / 1000),
+      owned_by: model.provider,
+    }));
+    return json({ object: "list", data });
   }
 
   if (pathname === "/v1/chat/completions" && req.method === "POST") {
