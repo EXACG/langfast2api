@@ -2,6 +2,14 @@
 
 这是一个基于 Deno 的 API 服务器，它将 LangFast 的 API 代理为完全兼容 OpenAI 的接口。
 
+## 🚀 快速部署
+
+**注意**：要部署此项目，你需要先 fork 仓库到你的 GitHub 账户下。
+
+1. 点击右上角的 "Fork" 按钮
+2. 选择你的 GitHub 账户
+3. 然后按照下面的部署指南操作
+
 ## 功能特性
 
 - **完全兼容 OpenAI API**: 支持标准的 `/v1/models` 和 `/v1/chat/completions` 端点
@@ -31,15 +39,17 @@ deno task dev
 
 #### 方法一：通过 Deno Deploy 控制台手动部署
 
-1. **准备 GitHub 仓库**
-   - 确保代码已推送到 GitHub 仓库
-   - 本项目已配置好 `deploy.ts` 作为入口点
+1. **Fork GitHub 仓库**
+   - 访问 [CassiopeiaCode/langfast2api](https://github.com/CassiopeiaCode/langfast2api)
+   - 点击右上角的 "Fork" 按钮
+   - 选择你的 GitHub 账户作为目标
+   - 等待 fork 完成
 
 2. **创建 Deno Deploy 项目**
    - 访问 [Deno Deploy Dashboard](https://dash.deno.com/)
    - 点击 "New Project"
    - 选择 "GitHub" 连接你的 GitHub 账户
-   - 选择 `CassiopeiaCode/langfast2api` 仓库
+   - **选择你 fork 的仓库**（格式为 `你的用户名/langfast2api`）
    - 选择 `main` 分支
 
 3. **配置部署设置**
@@ -53,14 +63,17 @@ deno task dev
 
 #### 方法二：通过 GitHub Actions 自动部署
 
-1. **获取 Deno Deploy 访问令牌**
+1. **Fork GitHub 仓库**
+   - 首先按照方法一中的步骤 fork 仓库到你的账户下
+
+2. **获取 Deno Deploy 访问令牌**
    - 在 Deno Deploy Dashboard 中
    - 点击右上角头像 → "Account"
    - 在 "Deno Deploy API tokens" 部分创建新令牌
    - 复制生成的令牌
 
-2. **配置 GitHub Secrets**
-   - 在 GitHub 仓库中
+3. **配置 GitHub Secrets**
+   - 在你 fork 的 GitHub 仓库中
    - 进入 "Settings" → "Secrets and variables" → "Actions"
    - 点击 "New repository secret"
    - 添加以下 secrets：
