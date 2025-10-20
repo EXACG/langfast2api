@@ -96,4 +96,7 @@ async function handleRequest(req: Request): Promise<Response> {
 }
 
 // Deno Deploy entry point
-serve(handleRequest);
+serve(handleRequest, {
+  port: Deno.env.get("PORT") ? Number(Deno.env.get("PORT")) : 8000,
+  hostname: "0.0.0.0"
+});

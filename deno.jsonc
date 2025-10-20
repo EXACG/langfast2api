@@ -4,6 +4,9 @@
     "deploy": "deno run --allow-net --allow-read deploy.ts"
   },
   "imports": {},
+  "compilerOptions": {
+    "lib": ["deno.window"]
+  },
   "deploy": {
     "entrypoint": "deploy.ts"
   }
