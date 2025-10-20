@@ -15,6 +15,7 @@
 - **完全兼容 OpenAI API**: 支持标准的 `/v1/models` 和 `/v1/chat/completions` 端点
 - **流式响应**: 通过 Server-Sent Events (SSE) 实时返回增量聊天内容
 - **非流式响应**: 等待完整响应后一次性返回 JSON 格式的最终结果
+- **可选身份认证**: 支持 Bearer Token 认证保护 API 端点
 - **无需外部依赖**: 使用 Deno 原生 WebSocket 实现 Socket.IO 协议
 
 ## 快速开始
@@ -32,6 +33,25 @@ deno task dev
 ```
 
 服务器将在 `http://localhost:8000` 上启动。
+
+#### 可选：启用身份认证
+
+如需启用 API 身份认证，设置环境变量 `USER_SET_KEY`：
+
+```bash
+# Linux/macOS
+export USER_SET_KEY="your-secret-key"
+deno task dev
+
+# Windows (PowerShell)
+$env:USER_SET_KEY="your-secret-key"
+deno task dev
+```
+
+启用后，所有 `/v1/chat/completions` 请求需要在 Header 中携带：
+```
+Authorization: Bearer your-secret-key
+```
 
 ### Deno Deploy 部署
 
@@ -54,7 +74,9 @@ deno task dev
 
 3. **配置部署设置**
    - **入口点**: 选择 `deploy.ts`
-   - **环境变量**: 无需额外配置（所有配置已在代码中）
+   - **环境变量**（可选）: 
+     - 如需启用身份认证，添加 `USER_SET_KEY` 环境变量
+     - 不设置则跳过认证
    - 点击 "Deploy" 开始部署
 
 4. **获取部署 URL**
@@ -138,6 +160,23 @@ curl -X POST http://localhost:8000/v1/chat/completions \
   }'
 ```
 
+### 带身份认证的请求
+
+如果启用了 `USER_SET_KEY` 环境变量，需要添加 Authorization header：
+
+```bash
+curl -X POST http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your-secret-key" \
+  -d '{
+    "model": "gpt-5",
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ],
+    "stream": false
+  }'
+```
+
 ### 流式聊天完成
 
 ```bash
@@ -163,11 +202,12 @@ curl -N -X POST http://localhost:8000/v1/chat/completions \
 
 ## 工作原理
 
-1. **认证**: 获取 LangFast 的匿名访问令牌
-2. **创建 Prompt**: 在 LangFast 中创建一个 prompt 并获取其 ID
-3. **启动运行**: 启动 prompt 运行并获取任务 ID
-4. **WebSocket 连接**: 通过 WebSocket 连接接收流式响应
-5. **格式转换**: 将响应转换为 OpenAI 兼容的格式
+1. **身份认证（可选）**: 验证请求的 Bearer Token（如果设置了 `USER_SET_KEY`）
+2. **LangFast 认证**: 获取 LangFast 的匿名访问令牌
+3. **创建 Prompt**: 在 LangFast 中创建一个 prompt 并获取其 ID
+4. **启动运行**: 启动 prompt 运行并获取任务 ID
+5. **WebSocket 连接**: 通过 WebSocket 连接接收流式响应
+6. **格式转换**: 将响应转换为 OpenAI 兼容的格式
 
 ## 开发
 

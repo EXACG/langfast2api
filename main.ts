@@ -123,6 +123,21 @@ export async function handler(req: Request): Promise<Response> {
   }
 
   if (pathname === "/v1/chat/completions" && req.method === "POST") {
+    const userSetKey = Deno.env.get("USER_SET_KEY");
+    
+    if (userSetKey) {
+      const authHeader = req.headers.get("Authorization");
+      
+      if (!authHeader) {
+        return json({ error: "Missing Authorization header" }, { status: 401 });
+      }
+      
+      const expectedAuth = `Bearer ${userSetKey}`;
+      if (authHeader !== expectedAuth) {
+        return json({ error: "Invalid authorization token" }, { status: 401 });
+      }
+    }
+    
     return handleChatCompletions(req);
   }
 
