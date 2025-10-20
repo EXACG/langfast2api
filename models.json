@@ -1,0 +1,576 @@
+[
+    {
+        "slug": "gpt-4.1",
+        "name": "GPT-4.1",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4.1-2025-04-14"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 32768
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-4.1-mini",
+        "name": "GPT-4.1 Mini",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4.1-mini-2025-04-14"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 32768
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-4.1-nano",
+        "name": "GPT-4.1 Nano",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4.1-nano-2025-04-14"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 32768
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-4o",
+        "name": "GPT-4o",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4o-2024-11-20",
+            "gpt-4o-2024-08-06",
+            "gpt-4o-2024-05-13"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 16384
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "o1-mini",
+        "name": "O1 Mini",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "o1-mini-2024-09-12"
+        ],
+        "parameters": {
+            "stream": true,
+            "message_types": [
+                "user",
+                "assistant"
+            ],
+            "max_completion_tokens": {
+                "max_value": 65536
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-4o-mini",
+        "name": "GPT-4o Mini",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4o-mini-2024-07-18"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 16384
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-3.5-turbo",
+        "name": "GPT-3.5 Turbo",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-3.5-turbo-0125",
+            "gpt-3.5-turbo-1106",
+            "gpt-3.5-turbo-0613"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 4096
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-4.5-preview",
+        "name": "GPT-4.5 Preview",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4.5-preview-2025-02-27"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 16384
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": true
+    },
+    {
+        "slug": "gpt-4-turbo",
+        "name": "GPT-4 Turbo",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4-turbo-2024-04-09",
+            "gpt-4-0125-preview",
+            "gpt-4-1106-preview"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 4096
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": true
+    },
+    {
+        "slug": "o1",
+        "name": "O1",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "o1-2024-12-17"
+        ],
+        "parameters": {
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 100000
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "o3",
+        "name": "O3",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "o3-2025-04-16"
+        ],
+        "parameters": {
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 100000
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "o3-mini",
+        "name": "O3 Mini",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "o3-mini-2024-12-01-preview"
+        ],
+        "parameters": {
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 100000
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "o4-mini",
+        "name": "O4 Mini",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "o4-mini-2025-04-16"
+        ],
+        "parameters": {
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 100000
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-4",
+        "name": "GPT-4",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-4-0613",
+            "gpt-4-0314"
+        ],
+        "parameters": {
+            "top_p": true,
+            "stream": true,
+            "temperature": true,
+            "message_types": [
+                "system",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object"
+            ],
+            "presence_penalty": true,
+            "frequency_penalty": true,
+            "max_completion_tokens": {
+                "max_value": 4096
+            }
+        },
+        "created_at": "2025-06-30T18:06:39.504307+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": true
+    },
+    {
+        "slug": "gpt-5",
+        "name": "GPT-5",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-5-2025-08-07"
+        ],
+        "parameters": {
+            "stream": true,
+            "summary": [
+                "detailed",
+                "auto",
+                "null"
+            ],
+            "verbosity": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "minimal",
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 128000
+            }
+        },
+        "created_at": "2025-08-08T17:02:05.435099+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-5-mini",
+        "name": "GPT-5 Mini",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-5-mini-2025-08-07"
+        ],
+        "parameters": {
+            "stream": true,
+            "summary": [
+                "detailed",
+                "auto",
+                "null"
+            ],
+            "verbosity": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "minimal",
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 128000
+            }
+        },
+        "created_at": "2025-08-08T17:02:05.435099+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    },
+    {
+        "slug": "gpt-5-nano",
+        "name": "GPT-5 Nano",
+        "provider": "openai",
+        "status": "public",
+        "versions": [
+            "gpt-5-nano-2025-08-07"
+        ],
+        "parameters": {
+            "stream": true,
+            "summary": [
+                "detailed",
+                "auto",
+                "null"
+            ],
+            "verbosity": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "message_types": [
+                "developer",
+                "user",
+                "assistant"
+            ],
+            "response_format": [
+                "text",
+                "json_object",
+                "json_schema"
+            ],
+            "reasoning_effort": [
+                "minimal",
+                "low",
+                "medium",
+                "high"
+            ],
+            "max_completion_tokens": {
+                "max_value": 128000
+            }
+        },
+        "created_at": "2025-08-08T17:02:05.435099+00:00",
+        "updated_at": "2025-10-16T07:31:13.509181+00:00",
+        "premium": false
+    }
+]
