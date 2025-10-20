@@ -1,5 +1,11 @@
 // main.ts
 import models from "./models.json" with { type: "json" };
+import {
+  getAccessToken,
+  createPrompt,
+  initiatePromptRun,
+  createStreamingResponse,
+} from "./langfast_client.ts";
 
 function json(data: unknown, init: ResponseInit = {}) {
   return new Response(JSON.stringify(data), {
@@ -11,45 +17,89 @@ function json(data: unknown, init: ResponseInit = {}) {
 async function handleChatCompletions(req: Request): Promise<Response> {
   const body = await req.json().catch(() => ({}));
   const stream = !!body.stream;
+  const model = body.model ?? "gpt-5";
+  const messages = Array.isArray(body.messages) ? body.messages : [];
 
-  if (stream) {
-    // SSE 流式示例（最简版）
-    const enc = new TextEncoder();
-    const streamBody = new ReadableStream({
-      start(controller) {
-        controller.enqueue(enc.encode(
-          `data: ${JSON.stringify({
-            id: "cmpl_mock",
-            choices: [{ delta: { content: "Hello" }, index: 0 }],
-          })}\n\n`,
-        ));
-        controller.enqueue(enc.encode("data: [DONE]\n\n"));
-        controller.close();
-      },
-    });
-    return new Response(streamBody, {
-      headers: {
-        "content-type": "text/event-stream; charset=utf-8",
-        "cache-control": "no-cache",
-        "connection": "keep-alive",
-        "x-accel-buffering": "no",
-      },
-    });
+  try {
+    const { accessToken, userId } = await getAccessToken();
+    const promptId = await createPrompt(accessToken, model, messages);
+    const { run_id, jobs } = await initiatePromptRun(
+      accessToken,
+      promptId,
+      userId,
+      model,
+      messages,
+    );
+    const jobId = jobs[0]?.job_id;
+    if (!jobId) {
+      return json({ error: "no job id returned" }, { status: 500 });
+    }
+
+    const sseStream = await createStreamingResponse(
+      accessToken,
+      jobId,
+      run_id,
+      model,
+    );
+
+    if (stream) {
+      return new Response(sseStream, {
+        headers: {
+          "content-type": "text/event-stream; charset=utf-8",
+          "cache-control": "no-cache",
+          "connection": "keep-alive",
+          "x-accel-buffering": "no",
+        },
+      });
+    } else {
+      // Non-streaming: consume the stream and aggregate the response
+      const reader = sseStream.getReader();
+      const decoder = new TextDecoder();
+      let fullContent = "";
+      let finish_reason = "stop"; // default
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        // SSE messages are separated by double newlines
+        const lines = chunk.split("\n\n").filter(line => line.startsWith("data: "));
+
+        for (const line of lines) {
+          const data = line.substring("data: ".length);
+          if (data === "[DONE]") {
+            break;
+          }
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.choices && parsed.choices[0].delta?.content) {
+              fullContent += parsed.choices[0].delta.content;
+            }
+            if (parsed.choices && parsed.choices[0].finish_reason) {
+              finish_reason = parsed.choices[0].finish_reason;
+            }
+          } catch (e) {
+            // Ignore parsing errors for potentially incomplete JSON chunks
+          }
+        }
+      }
+
+      return json({
+        id: run_id,
+        object: "chat.completion",
+        model,
+        choices: [{
+          index: 0,
+          finish_reason: finish_reason,
+          message: { role: "assistant", content: fullContent },
+        }],
+      });
+    }
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    return json({ error: errorMessage }, { status: 500 });
   }
-
-  // 非流式示例
-  return json({
-    id: "cmpl_mock",
-    object: "chat.completion",
-    model: body.model ?? "gpt-5",
-    choices: [
-      {
-        index: 0,
-        finish_reason: "stop",
-        message: { role: "assistant", content: "Hello" },
-      },
-    ],
-  });
 }
 
 export async function handler(req: Request): Promise<Response> {
