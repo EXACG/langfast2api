@@ -1,33 +1,36 @@
-name: Deploy to Deno Deploy
-
+name: Deploy
 on:
   push:
-    branches: [ main ]
+    branches: main
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: main
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+
     permissions:
       id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: v2.x
 
-      - name: Build project
-        run: deno cache deploy.ts
+      - name: Build step
+        run: "deno task build"
 
-      - name: Deploy to Deno Deploy
+      - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: ${{ secrets.DENO_PROJECT_ID || 'langfast2api' }}
-          entrypoint: "deploy.ts"
-          token: ${{ secrets.DENO_DEPLOY_TOKEN }}
+          project: "langfast2ap-83"
+          entrypoint: "main.ts"
+          root: "."
+          
+          
